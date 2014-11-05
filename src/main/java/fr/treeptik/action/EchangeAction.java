@@ -1,6 +1,10 @@
 package fr.treeptik.action;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -26,7 +30,7 @@ public class EchangeAction extends ActionSupport {
 
 	@Autowired
 	private EchangeService echangeService;
-
+	private String dateEchange;
 	private Echange echange = new Echange();
 	private List<Echange> echanges = new ArrayList<>();
 	private List<Contact> contacts = new ArrayList<>();
@@ -42,7 +46,9 @@ public class EchangeAction extends ActionSupport {
 	@Action(value = "InitUpdateAction", results = { @Result(name = "success", location = "/echange/add.jsp") })
 	@SkipValidation
 	public String initUpdate() {
-		echange = echangeService.get(echange.getId());
+		if (echange.getId() != null) {
+			echange = echangeService.get(echange.getId());
+		}
 		contacts = echangeService.getContacts();
 		return "success";
 
@@ -52,9 +58,11 @@ public class EchangeAction extends ActionSupport {
 			@Result(name = "success", type = "redirectAction", location = "listAction.action"),
 			@Result(name = "input", location = "/echange/add.jsp") })
 	public String addEmployee() throws Exception {
-		System.out.println("ADD EMPLOYEE");
+		System.out.println("ADD echange");
 
-		System.out.println(echange);
+		System.out.println("date :" + dateEchange);
+
+		echange.setDate(getDatajava());
 
 		echangeService.add(echange);
 
@@ -99,6 +107,26 @@ public class EchangeAction extends ActionSupport {
 
 	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
+	}
+
+	public Date getDatajava() {
+		// DD-MM-YYYY HH:mm
+		DateFormat formatter = new SimpleDateFormat("DD-MM-YYYY HH:mm");
+		Date date = null;
+		try {
+			date = formatter.parse(dateEchange);
+		} catch (ParseException e) {
+			return date;
+		}
+		return date;
+	}
+
+	public String getDateEchange() {
+		return dateEchange;
+	}
+
+	public void setDateEchange(String dateEchange) {
+		this.dateEchange = dateEchange;
 	}
 
 }

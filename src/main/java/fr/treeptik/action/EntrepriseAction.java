@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import fr.treeptik.entity.Contact;
 import fr.treeptik.entity.Entreprise;
 import fr.treeptik.service.EntrepriseService;
 
@@ -28,6 +29,7 @@ public class EntrepriseAction extends ActionSupport {
 
 	private Entreprise entreprise = new Entreprise();
 	private List<Entreprise> entreprises = new ArrayList<>();
+	private List<Contact> contacts = new ArrayList<>();
 
 	public void validate() {
 
@@ -40,8 +42,22 @@ public class EntrepriseAction extends ActionSupport {
 	@Action(value = "InitUpdateAction", results = { @Result(name = "success", location = "/entreprise/add.jsp") })
 	@SkipValidation
 	public String initUpdate() {
-		entreprise = entrepriseService.get(entreprise.getId());
+		if (entreprise.getId() != null) {
+			entreprise = entrepriseService.get(entreprise.getId());
+		}
+		return "success";
 
+	}
+
+	// detailEntreprise
+
+	@Action(value = "detailEntreprise", results = { @Result(name = "success", location = "/entreprise/details.jsp") })
+	@SkipValidation
+	public String detailEntreprise() {
+
+		entreprise = entrepriseService.get(entreprise.getId());
+		contacts = entrepriseService.getContactfromEntrepriseId(entreprise
+				.getId());
 		return "success";
 
 	}
@@ -89,6 +105,14 @@ public class EntrepriseAction extends ActionSupport {
 
 	public void setEntreprises(List<Entreprise> entrerpises) {
 		this.entreprises = entrerpises;
+	}
+
+	public List<Contact> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(List<Contact> contacts) {
+		this.contacts = contacts;
 	}
 
 }

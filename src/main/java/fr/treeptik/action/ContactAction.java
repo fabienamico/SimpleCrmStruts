@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
 import fr.treeptik.entity.Contact;
+import fr.treeptik.entity.Entreprise;
 import fr.treeptik.service.ContactService;
 
 @Component(value = "contactAction")
@@ -30,6 +31,7 @@ public class ContactAction extends ActionSupport implements
 
 	private Contact contact = new Contact();
 	private List<Contact> contacts = new ArrayList<>();
+	private List<Entreprise> entreprises = new ArrayList<>();
 
 	@Override
 	public Contact getModel() {
@@ -47,8 +49,10 @@ public class ContactAction extends ActionSupport implements
 	@Action(value = "InitUpdateAction", results = { @Result(name = "success", location = "/contact/add.jsp") })
 	@SkipValidation
 	public String initUpdate() {
-		contact = contactService.get(contact.getId());
-
+		if (contact.getId() != null) {
+			contact = contactService.get(contact.getId());
+		}
+		entreprises = contactService.getAllEntreprise();
 		return "success";
 
 	}
@@ -56,11 +60,8 @@ public class ContactAction extends ActionSupport implements
 	@Action(value = "addAction", results = {
 			@Result(name = "success", type = "redirectAction", location = "listAction.action"),
 			@Result(name = "input", location = "/contact/add.jsp") })
-	public String addEmployee() throws Exception {
+	public String addContact() throws Exception {
 		System.out.println("ADD EMPLOYEE");
-
-		System.out.println(contact);
-
 		contactService.add(contact);
 
 		return "success";
@@ -68,7 +69,7 @@ public class ContactAction extends ActionSupport implements
 
 	@Action(value = "listAction", results = { @Result(name = "success", location = "/contact/list.jsp") })
 	@SkipValidation
-	public String listEmployees() throws Exception {
+	public String listContacts() throws Exception {
 		contacts = contactService.getAll();
 
 		return "success";
@@ -76,7 +77,7 @@ public class ContactAction extends ActionSupport implements
 
 	@Action(value = "deleteAction", results = { @Result(name = "success", type = "redirectAction", location = "listAction.action") })
 	@SkipValidation
-	public String deleteEmployees() throws Exception {
+	public String deleteContacts() throws Exception {
 
 		contactService.delete(contact.getId());
 		return "success";
@@ -96,6 +97,14 @@ public class ContactAction extends ActionSupport implements
 
 	public void setContacts(List<Contact> contacts) {
 		this.contacts = contacts;
+	}
+
+	public List<Entreprise> getEntreprises() {
+		return entreprises;
+	}
+
+	public void setEntreprises(List<Entreprise> entreprises) {
+		this.entreprises = entreprises;
 	}
 
 }

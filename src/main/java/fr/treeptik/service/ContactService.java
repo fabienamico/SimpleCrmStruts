@@ -2,9 +2,8 @@ package fr.treeptik.service;
 
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import fr.treeptik.entity.Contact;
+import fr.treeptik.entity.Entreprise;
 
 public interface ContactService {
 
@@ -15,5 +14,9 @@ public interface ContactService {
 	public Contact get(Integer id);
 
 	public void delete(Integer contactId);
+
+	public List<Entreprise> getAllEntreprise();
+
+	public List<Contact> getAllContactFromEntrepriseId(Integer id);
 
 }

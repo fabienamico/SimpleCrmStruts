@@ -10,6 +10,10 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Echange {
+	public enum TypeContact {
+		Mail, Direct, Tel, Autre
+	};
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;

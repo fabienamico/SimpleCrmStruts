@@ -11,6 +11,11 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Contact {
+
+	public enum Status {
+		ProsPay, Client, Contact
+	};
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
@@ -21,7 +26,7 @@ public class Contact {
 	private String mobile;
 	private String status;
 	@OneToOne
-	private Entreprise enteprise;
+	private Entreprise entreprise;
 
 	@OneToMany(mappedBy = "contact")
 	private List<Echange> echanges;
@@ -38,7 +43,7 @@ public class Contact {
 		this.tel = tel;
 		this.mobile = mobile;
 		this.status = status;
-		this.enteprise = enteprise;
+		this.entreprise = enteprise;
 		this.echanges = echanges;
 	}
 
@@ -123,12 +128,12 @@ public class Contact {
 		this.status = status;
 	}
 
-	public Entreprise getEnteprise() {
-		return enteprise;
+	public Entreprise getEntreprise() {
+		return entreprise;
 	}
 
-	public void setEnteprise(Entreprise enteprise) {
-		this.enteprise = enteprise;
+	public void setEntreprise(Entreprise entreprise) {
+		this.entreprise = entreprise;
 	}
 
 	public List<Echange> getEchanges() {

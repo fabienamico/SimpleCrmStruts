@@ -8,13 +8,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import fr.treeptik.dao.ContactDao;
 import fr.treeptik.entity.Contact;
+import fr.treeptik.entity.Entreprise;
 import fr.treeptik.service.ContactService;
+import fr.treeptik.service.EntrepriseService;
 
 @Service
 public class ContactServiceImpl implements ContactService {
 
 	@Autowired
 	private ContactDao contactDao;
+
+	@Autowired
+	private EntrepriseService entrepriseService;
 
 	@Override
 	@Transactional
@@ -26,6 +31,7 @@ public class ContactServiceImpl implements ContactService {
 	@Transactional
 	public List<Contact> getAll() {
 		return contactDao.findAll();
+
 	}
 
 	@Override
@@ -38,6 +44,17 @@ public class ContactServiceImpl implements ContactService {
 	@Transactional
 	public void delete(Integer contactId) {
 		contactDao.delete(contactId);
+	}
+
+	@Override
+	public List<Entreprise> getAllEntreprise() {
+		return entrepriseService.getAll();
+	}
+
+	@Override
+	public List<Contact> getAllContactFromEntrepriseId(Integer id) {
+		// TODO Auto-generated method stub
+		return contactDao.findByEntreprise(id);
 	}
 
 }

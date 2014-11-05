@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.treeptik.dao.EntrepriseDao;
+import fr.treeptik.entity.Contact;
 import fr.treeptik.entity.Entreprise;
+import fr.treeptik.service.ContactService;
 import fr.treeptik.service.EntrepriseService;
 
 @Service
@@ -15,6 +17,9 @@ public class EntrepriseServiceImpl implements EntrepriseService {
 
 	@Autowired
 	private EntrepriseDao entrepriseDao;
+
+	@Autowired
+	private ContactService contactService;
 
 	@Override
 	@Transactional
@@ -40,4 +45,9 @@ public class EntrepriseServiceImpl implements EntrepriseService {
 		entrepriseDao.delete(entrepiseId);
 	}
 
+	@Override
+	public List<Contact> getContactfromEntrepriseId(Integer id) {
+		// TODO Auto-generated method stub
+		return contactService.getAllContactFromEntrepriseId(id);
+	}
 }

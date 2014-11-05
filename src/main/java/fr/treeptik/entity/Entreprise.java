@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Entreprise {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
@@ -21,7 +22,7 @@ public class Entreprise {
 	@ElementCollection
 	private List<String> secteurActivité;
 
-	@OneToMany(mappedBy = "enteprise")
+	@OneToMany(mappedBy = "entreprise")
 	private List<Contact> contacts;
 
 	public Entreprise() {
