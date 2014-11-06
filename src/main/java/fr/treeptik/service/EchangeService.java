@@ -17,4 +17,6 @@ public interface EchangeService {
 
 	public List<Contact> getContacts();
 
+	public List<Echange> getEchangesFromContactId(Integer id);
+
 }

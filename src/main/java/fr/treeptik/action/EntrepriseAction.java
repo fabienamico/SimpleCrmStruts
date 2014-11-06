@@ -58,6 +58,8 @@ public class EntrepriseAction extends ActionSupport {
 		entreprise = entrepriseService.get(entreprise.getId());
 		contacts = entrepriseService.getContactfromEntrepriseId(entreprise
 				.getId());
+		// echanges = entrepriseService.getContactfromEntrepriseId(entreprise
+		// .getId());
 		return "success";
 
 	}

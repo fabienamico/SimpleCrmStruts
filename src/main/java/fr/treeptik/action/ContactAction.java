@@ -83,6 +83,17 @@ public class ContactAction extends ActionSupport implements
 		return "success";
 	}
 
+	// contactEchanges
+	@Action(value = "contactEchanges", results = { @Result(name = "success", location = "/contact/contactEchanges.jsp") })
+	@SkipValidation
+	public String detailContact() throws Exception {
+
+		contact = contactService.get(contact.getId());
+		contact.setEchanges(contactService.getEchangesFromContactId(contact
+				.getId()));
+		return "success";
+	}
+
 	public Contact getContact() {
 		return contact;
 	}

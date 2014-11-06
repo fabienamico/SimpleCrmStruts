@@ -10,7 +10,7 @@
 	<section class="main">
 		<div class="padder clearfix">
 			<div class="row">
-				<div class="col col-lg-7">
+				<div class="col col-lg-9">
 					<s:if test="%{echange.id!=null}">
 						<h4>
 							<i class="icon-edit"></i>Modification Echange
@@ -24,7 +24,7 @@
 
 
 					<section class="panel">
-						<s:actionerror />
+						<s:fielderror fieldName="commentaire" />
 						<s:form action="addAction" cssClass="form-horizontal">
 							<s:hidden name="echange.id" />
 
@@ -53,9 +53,11 @@
 							<div class="row">
 								<label class="col col-lg-3 control-label">date</label>
 								<div class="col col-lg-8">
-									
-										
-									<input type="text" class="combodate" data-format="DD-MM-YYYY HH:mm" data-template="D  MMM  YYYY  -  HH : mm" name="dateEchange" value="21-12-2012 20:30" style="display: none;">
+									<input type="text" class="combodate"
+										data-format="DD-MM-YYYY HH:mm"
+										data-template="D  MMM  YYYY  -  HH : mm" name="dateEchange"
+										value="<s:date name="echange.date" format="dd-MM-YYYY HH:mm" />"
+										style="display: none;">
 								</div>
 							</div>
 
@@ -82,23 +84,28 @@
 		</div>
 	</section>
 </section>
- <!-- / footer -->
-	<script src="<c:url value="/theme/Template-Admin/js/jquery.min.js"/>"></script>
-  <!-- Bootstrap -->
-  <script src="<c:url value="/theme/Template-Admin/js/bootstrap.js"/>"></script>
-  <!-- app -->
-  <script src="<c:url value="/theme/Template-Admin/js/app.js"/>"></script>
-  <script src="<c:url value="/theme/Template-Admin/js/app.plugin.js"/>"></script>
-  <script src="<c:url value="/theme/Template-Admin/js/app.data.js"/>"></script>
+<!-- / footer -->
+<script src="<c:url value="/theme/Template-Admin/js/jquery.min.js"/>"></script>
+<!-- Bootstrap -->
+<script src="<c:url value="/theme/Template-Admin/js/bootstrap.js"/>"></script>
+<!-- app -->
+<script src="<c:url value="/theme/Template-Admin/js/app.js"/>"></script>
+<script src="<c:url value="/theme/Template-Admin/js/app.plugin.js"/>"></script>
+<script src="<c:url value="/theme/Template-Admin/js/app.data.js"/>"></script>
 
-  <!-- datepicker -->
-  <script src="<c:url value="/theme/Template-Admin/js/datepicker/bootstrap-datepicker.js"/>"></script>
+<!-- datepicker -->
+<script
+	src="<c:url value="/theme/Template-Admin/js/datepicker/bootstrap-datepicker.js"/>"></script>
 
- <!-- combodate -->
-  <script src="<c:url value="/theme/Template-Admin/js/combodate/moment.min.js"/>"></script>
-  <script src="<c:url value="/theme/Template-Admin/js/combodate/combodate.js"/>"></script>
- <!-- combodate -->
-  <script src="<c:url value="/theme/Template-Admin/js/combodate/moment.min.js"/>"></script>
-  <script src="<c:url value="/theme/Template-Admin/js/combodate/combodate.js"/>"></script>
+<!-- combodate -->
+<script
+	src="<c:url value="/theme/Template-Admin/js/combodate/moment.min.js"/>"></script>
+<script
+	src="<c:url value="/theme/Template-Admin/js/combodate/combodate.js"/>"></script>
+<!-- combodate -->
+<script
+	src="<c:url value="/theme/Template-Admin/js/combodate/moment.min.js"/>"></script>
+<script
+	src="<c:url value="/theme/Template-Admin/js/combodate/combodate.js"/>"></script>
 
 <jsp:include page="/template/footer.jsp" />

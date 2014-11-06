@@ -49,4 +49,10 @@ public class EchangeServiceImpl implements EchangeService {
 		return contactService.getAll();
 	}
 
+	@Override
+	public List<Echange> getEchangesFromContactId(Integer id) {
+
+		return echangeDao.getEchangesFromContactId(id);
+	}
+
 }

@@ -3,6 +3,7 @@ package fr.treeptik.service;
 import java.util.List;
 
 import fr.treeptik.entity.Contact;
+import fr.treeptik.entity.Echange;
 import fr.treeptik.entity.Entreprise;
 
 public interface ContactService {
@@ -18,5 +19,7 @@ public interface ContactService {
 	public List<Entreprise> getAllEntreprise();
 
 	public List<Contact> getAllContactFromEntrepriseId(Integer id);
+
+	public List<Echange> getEchangesFromContactId(Integer id);
 
 }

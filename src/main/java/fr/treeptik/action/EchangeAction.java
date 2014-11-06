@@ -37,9 +37,10 @@ public class EchangeAction extends ActionSupport {
 
 	public void validate() {
 
-		// if (getContact().getNom().trim().length() == 0) {
-		// addFieldError("firstname", "First name is required.");
-		// }
+		if (echange.getCommentaire().trim().length() == 0) {
+			addFieldError("commentaire", "Commentaire is required.");
+		}
+		// initUpdate();
 
 	}
 
@@ -48,6 +49,9 @@ public class EchangeAction extends ActionSupport {
 	public String initUpdate() {
 		if (echange.getId() != null) {
 			echange = echangeService.get(echange.getId());
+		}
+		if (echange.getDate() == null) {
+			echange.setDate(new Date());
 		}
 		contacts = echangeService.getContacts();
 		return "success";
@@ -111,8 +115,9 @@ public class EchangeAction extends ActionSupport {
 
 	public Date getDatajava() {
 		// DD-MM-YYYY HH:mm
-		DateFormat formatter = new SimpleDateFormat("DD-MM-YYYY HH:mm");
+		DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 		Date date = null;
+		System.out.println("date-convert : " + formatter.toString());
 		try {
 			date = formatter.parse(dateEchange);
 		} catch (ParseException e) {

@@ -11,31 +11,61 @@
 			<div class="row">
 				<div class="col col-lg-12">
 					<h4>
+						
+					</h4>
+<section class="panel">
+<header class="panel-heading">
+              <span class="label bg-info pull-right"><s:property value="echanges.size()" /> éléments</span>
+              <h4>
 						<i class="icon-list"></i>List Echanges
 					</h4>
+            </header>
+<div class="pull-out">
 
-
-					<table aria-describedby="DataTables_Table_0_info"
-						id="DataTables_Table_0"
-						class="table table-striped m-b-none dataTable"
-						data-ride="datatables">
+					 <table class="table table-striped m-b-none">
 						<thead>
 							<tr>
-								<th>ID</th>
-								<th>date</th>
-								<th>type</th>
-								<th>Commentaire</th>
-								<th>adresse</th>
-								<th></th>
+								<th class="text-center" style="
+    width: 3%;
+"  class="text-center" >ID</th>
+								<th  class="text-center" style="
+    width: 14%;
+">date</th>
+								<th   class="text-center" style="
+    width: 13%;
+">type</th>
+								<th  class="text-center" >Commentaire</th>
+								<th  class="text-center" >adresse</th>
+<th  class="text-center" >contact</th>
+								<th  class="text-center" style="
+    width: 6%;
+"></th>
 							</tr>
 						</thead>
 						<s:iterator value="echanges">
 							<tr>
 								<td><s:property value="id" /></td>
-								<td><s:property value="date" /></td>
+								<td><s:date name="date" format="dd/MM/yyyy - HH:mm" /></td>
 								<td><s:property value="type" /></td>
 								<td><s:property value="commentaire" /></td>
 								<td><s:property value="adresse" /></td>
+								<td>
+
+									<s:if test="{contact.id!=null}">
+											<s:url value="/contact/contactEchanges"
+												var="urlcontact">
+												<s:param name="id">
+													<s:property value="contact.id" />
+												</s:param>
+											</s:url> 
+											<a href="${urlcontact }" class="btn btn-info btn-mini">
+												<s:property value="contact.prenom" /> <s:property value="contact.nom" />
+											</a>
+
+
+									</s:if>
+									
+								</td>
 								<td><s:url action="deleteAction" var="urlDelete">
 										<s:param name="echange.id">
 											<s:property value="id" />
@@ -53,8 +83,8 @@
 
 
 					</table>
-
-
+</div>
+</section>
 				</div>
 			</div>
 		</div>
@@ -63,4 +93,3 @@
 
 
 <jsp:include page="/template/footer.jsp" />
-
